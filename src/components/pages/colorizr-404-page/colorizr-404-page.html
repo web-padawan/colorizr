@@ -1,0 +1,30 @@
+<link rel="import" href="../../../vendor/polymer/polymer.html">
+<link rel="import" href="../../layout/colorizr-layout/colorizr-layout.html">
+
+<!-- style module -->
+<link rel="import" href="styles/colorizr-404-page-styles.html">
+
+<dom-module id="colorizr-404-page">
+  <template>
+    <style include="colorizr-404-page-styles"></style>
+
+    <colorizr-layout>
+      <div page-content>
+        <h1>Page not found</h1>
+        <ul>
+          <li><a is="pushstate-anchor" href="/">Go home</a></li>
+        </ul>
+      </div>
+    </colorizr-layout>
+
+  </template>
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'colorizr-404-page'
+      });
+    })();
+  </script>
+</dom-module>

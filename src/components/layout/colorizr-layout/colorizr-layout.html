@@ -1,0 +1,36 @@
+<link rel="import" href="../../../vendor/polymer/polymer.html">
+<link rel="import" href="../../../vendor/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../../../vendor/app-layout/app-header/app-header.html">
+<link rel="import" href="../../../vendor/app-layout/app-toolbar/app-toolbar.html">
+
+<!-- style module -->
+<link rel="import" href="styles/colorizr-layout-styles.html">
+
+<dom-module id="colorizr-layout">
+  <template>
+    <style include="colorizr-layout-styles"></style>
+
+    <app-header-layout>
+      <app-header class="header" shadow>
+        <app-toolbar>
+          <div title class="title">
+            <img class="header__logo" src="../../../images/logo-dark.svg">
+          </div>
+        </app-toolbar>
+      </app-header>
+      <div class="container">
+        <content select="[page-content]"></content>
+      </div>
+    </app-header-layout>
+
+  </template>
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'colorizr-layout'
+      });
+    })();
+  </script>
+</dom-module>

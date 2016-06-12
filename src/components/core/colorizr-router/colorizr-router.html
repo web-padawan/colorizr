@@ -1,0 +1,72 @@
+<link rel="import" href="../../../vendor/polymer/polymer.html">
+<link rel="import" href="../../../vendor/app-router/app-router.html">
+<link rel="import" href="../../../vendor/pushstate-anchor/pushstate-anchor.html">
+
+<!-- style module -->
+<link rel="import" href="styles/colorizr-router-styles.html">
+
+<dom-module id="colorizr-router">
+  <template>
+    <style include="colorizr-router-styles"></style>
+
+    <app-router id="router" mode="pushstate" init="manual">
+
+      <!-- insertion point for mock routes -->
+      <content select="app-route"></content>
+
+      <app-route
+        path="/"
+        import="components/pages/colorizr-create-page/colorizr-create-page.html"
+        element="colorizr-create-page"
+        >
+      </app-route>
+
+      <app-route
+        path="*"
+        import="components/pages/colorizr-404-page/colorizr-404-page.html"
+        element="colorizr-404-page"
+        >
+      </app-route>
+
+    </app-router>
+
+  </template>
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'colorizr-router',
+        listeners: {
+          'router.activate-route-end': '_onRouteChanged'
+        },
+        properties: {
+          auto: {
+            type: Boolean,
+            value: false
+          },
+          routeData: {
+            type: Object,
+            value: function() {
+              return {};
+            }
+          }
+        },
+        start: function() {
+          this.$.router.init();
+        },
+        attached: function() {
+          if (this.auto) {
+            this.start();
+          }
+        },
+        _onRouteChanged: function(e) {
+          this.mixin(this.routeData, e.detail);
+          this.fire('colorizr-route-changed', {
+            data: this.routeData
+          });
+        }
+      });
+    })();
+  </script>
+</dom-module>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <base href="/">
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Pack">
+
+  <title>Colorizr</title>
+
+  <script>
+    // setup Polymer options
+    window.Polymer = {
+      dom: 'shady',
+      lazyRegister: true
+    };
+
+    // load webcomponents polyfills
+    (function() {
+      if ('registerElement' in document
+          && 'import' in document.createElement('link')
+          && 'content' in document.createElement('template')) {
+        // browser has web components
+      } else {
+        // polyfill web components
+        var e = document.createElement('script');
+        e.src = 'vendor/webcomponentsjs/webcomponents-lite.min.js';
+        document.head.appendChild(e);
+      }
+    })();
+  </script>
+
+  <link rel="import" href="components/app/colorizr-app/colorizr-app.html">
+
+  <link rel="import" href="styles/shared-styles.html">
+  <style is="custom-style" include="shared-styles"></style>
+
+</head>
+
+<body unresolved>
+    <!-- build:remove -->
+    <span id="browser-sync-binding"></span>
+    <!-- endbuild -->
+    <colorizr-app></colorizr-app>
+</body>
+</html>

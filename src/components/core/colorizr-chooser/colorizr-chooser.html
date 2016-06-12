@@ -1,0 +1,52 @@
+<link rel="import" href="../../../vendor/polymer/polymer.html">
+<link rel="import" href="../../../vendor/simple-color-picker/simple-color-picker.html">
+
+<!-- core -->
+<link rel="import" href="../colorizr-color-behavior/colorizr-color-behavior.html">
+
+<!-- style module -->
+<link rel="import" href="styles/colorizr-chooser-styles.html">
+
+<dom-module id="colorizr-chooser">
+  <template>
+    <style include="colorizr-chooser-styles"></style>
+
+    <simple-color-picker
+      id="picker"
+      width="300"
+      height="300"
+      selected-color="{{colorObj}}"
+    ></simple-color-picker>
+
+  </template>
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'colorizr-chooser',
+        behaviors: [
+          Polymer.ColorizrColorBehavior
+        ],
+        properties: {
+          colorHex: {
+            type: String,
+            notify: true
+          },
+          colorObj: {
+            type: Object
+          }
+        },
+        listeners: {
+          'picker.color-changed': '_onColorChanged'
+        },
+        ready: function() {
+          this.colorHex = this.getRandomColorHex();
+        },
+        _onColorChanged: function(e) {
+          this.colorHex = e.detail.value.hex;
+        }
+      });
+    })();
+  </script>
+</dom-module>

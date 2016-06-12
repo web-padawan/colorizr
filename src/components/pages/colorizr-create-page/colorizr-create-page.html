@@ -1,0 +1,31 @@
+<link rel="import" href="../../../vendor/polymer/polymer.html">
+<link rel="import" href="../../layout/colorizr-layout/colorizr-layout.html">
+
+<link rel="import" href="../../core/colorizr-chooser/colorizr-chooser.html">
+
+<!-- style module -->
+<link rel="import" href="styles/colorizr-create-page-styles.html">
+
+<dom-module id="colorizr-create-page">
+  <template>
+    <style include="colorizr-create-page-styles"></style>
+
+    <colorizr-layout>
+      <div page-content>
+        <div class="create" style$="background-color: [[color]]">
+          <colorizr-chooser color-hex="{{color}}"></colorizr-chooser>
+        </div>
+      </div>
+    </colorizr-layout>
+
+  </template>
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'colorizr-create-page'
+      });
+    })();
+  </script>
+</dom-module>

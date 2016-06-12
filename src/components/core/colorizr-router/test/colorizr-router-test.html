@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>colorizr-router test</title>
+    <script src="../../../../vendor/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script src="../../../../vendor/web-component-tester/browser.js"></script>
+    <link rel="import" href="../colorizr-router.html">
+  </head>
+  <body>
+    <test-fixture id="colorizr-router-fixture">
+      <template>
+        <colorizr-router>
+          <app-route
+            path="/\/components\/(.+)/"
+            regex redirect="/test/fahrenheit/451/">
+          </app-route>
+          <app-route
+            path="/test/:scale/:degree/"
+            element="colorizr-page-stub">
+          </app-route>
+        </colorizr-router>
+      </template>
+    </test-fixture>
+    <script>
+      suite('<colorizr-router>', function() {
+        var router;
+        setup(function() {
+          router = fixture('colorizr-router-fixture');
+        });
+        test('Redirect works and route params are passed', function(done) {
+          router.addEventListener('colorizr-route-changed', function(e) {
+            expect(e.detail.data.model).to.be.an('object');
+            expect(e.detail.data.model.scale).to.equal('fahrenheit');
+            expect(e.detail.data.model.degree).to.equal(451);
+
+            expect(router.routeData).to.be.an('object');
+            expect(router.routeData.model.scale).to.equal('fahrenheit');
+            expect(router.routeData.model.degree).to.equal(451);
+
+            done();
+          });
+          router.start();
+        });
+      });
+    </script>
+  </body>
+</html>
