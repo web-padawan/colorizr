@@ -1,0 +1,63 @@
+<link rel="import" href="../../../vendor/polymer/polymer.html">
+
+<!-- core -->
+<link rel="import" href="../colorizr-color-behavior/colorizr-color-behavior.html">
+
+<dom-module id="colorizr-shader">
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'colorizr-shader',
+        behaviors: [
+          Polymer.ColorizrColorBehavior
+        ],
+        properties: {
+          sourceColor: {
+            type: String,
+            observer: '_sourceColorChanged'
+          },
+          shades: {
+            type: Array,
+            notify: true,
+            value: function() {
+              return [];
+            }
+          }
+        },
+        _sourceColorChanged: function(colorStr) {
+          if (colorStr === undefined) {
+            return;
+          }
+          this.shades = [];
+          var color = this.getColorObj(colorStr);
+          var amount;
+          var shade;
+
+          // darker shades
+          amount = 8;
+          while (this.shades.length < 10) {
+            shade = color.clone().darken(amount).toHexString();
+            this.unshift('shades', shade);
+            if (shade === '#000000') {
+              break;
+            }
+            amount += 8;
+          }
+
+          // ligter shades
+          amount = 8;
+          while (this.shades.length < 10) {
+            shade = color.clone().lighten(amount).toHexString();
+            this.push('shades', shade);
+            if (shade === '#ffffff') {
+              break;
+            }
+            amount += 8;
+          }
+        }
+      });
+    })();
+  </script>
+</dom-module>

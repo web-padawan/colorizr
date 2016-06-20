@@ -1,0 +1,34 @@
+<link rel="import" href="../../../vendor/polymer/polymer.html">
+
+<!-- style module -->
+<link rel="import" href="styles/colorizr-samples-styles.html">
+
+<dom-module id="colorizr-samples">
+  <template>
+    <style include="colorizr-samples-styles"></style>
+
+    <div class="samples">
+      <template is="dom-repeat" items="{{items}}">
+        <div class="sample" style$="background-color: [[item]]">&nbsp;</div>
+      </template>
+    </div>
+
+  </template>
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'colorizr-samples',
+        properties: {
+          items: {
+            type: Array,
+            value: function() {
+              return [];
+            }
+          }
+        }
+      });
+    })();
+  </script>
+</dom-module>

@@ -1,16 +1,26 @@
 <link rel="import" href="../../../vendor/polymer/polymer.html">
+<script src="../../../vendor/tinycolor/tinycolor.js"></script>
 
 <script>
+  var tinycolor = window.tinycolor;
+
   /**
    * Use `Polymer.ColorizrColorBehavior` to use some get color functions.
    * @polymerBehavior Polymer.ColorizrColorBehavior
    */
   Polymer.ColorizrColorBehavior = {
+    getColorObj: function(colorStr) {
+      var colorObj = tinycolor(colorStr);
+      if (!colorObj.isValid()) {
+        throw new Error('Not a valid color: ', colorStr);
+      }
+      return colorObj;
+    },
     getRandomColorHex: function() {
-      return '#' + Math.floor(Math.random() * 16777215).toString(16);
+      return tinycolor.random().toHexString();
     },
     isValidColorHex: function(string) {
-      return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(string);
+      return this.getColorObj(string).isValid();
     }
   };
 </script>

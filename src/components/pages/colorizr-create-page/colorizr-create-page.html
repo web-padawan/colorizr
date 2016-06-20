@@ -1,7 +1,10 @@
 <link rel="import" href="../../../vendor/polymer/polymer.html">
 <link rel="import" href="../../layout/colorizr-layout/colorizr-layout.html">
+<link rel="import" href="../../layout/colorizr-samples/colorizr-samples.html">
 
 <link rel="import" href="../../core/colorizr-chooser/colorizr-chooser.html">
+<link rel="import" href="../../core/colorizr-shader/colorizr-shader.html">
+<link rel="import" href="../../core/colorizr-color-behavior/colorizr-color-behavior.html">
 
 <!-- style module -->
 <link rel="import" href="styles/colorizr-create-page-styles.html">
@@ -10,10 +13,25 @@
   <template>
     <style include="colorizr-create-page-styles"></style>
 
+    <colorizr-shader source-color="[[color]]" shades="{{shades}}"></colorizr-shader>
+
     <colorizr-layout>
       <div page-content>
         <div class="create" style$="background-color: [[color]]">
-          <colorizr-chooser color-hex="{{color}}"></colorizr-chooser>
+          <div class="create-container">
+            <h1 class="title" style$="color: [[_computeTitleColor(color)]]">Choose your color</h1>
+
+            <div class="chooser">
+              <colorizr-chooser color-hex="{{color}}"></colorizr-chooser>
+            </div>
+          </div>
+
+          <div class="color-samples-container">
+            <h2 class="color-samples-title">Darker and Lighter</h2>
+            <div class="coor-samples-wrapper">
+              <colorizr-samples items="[[shades]]"></colorizr-samples>
+            </div>
+          </div>
         </div>
       </div>
     </colorizr-layout>
@@ -24,7 +42,24 @@
       'use strict';
 
       Polymer({
-        is: 'colorizr-create-page'
+        is: 'colorizr-create-page',
+        behaviors: [
+          Polymer.ColorizrColorBehavior
+        ],
+        properties: {
+          color: {
+            type: String
+          },
+          shades: {
+            type: Array,
+            value: function() {
+              return [];
+            }
+          }
+        },
+        _computeTitleColor: function(color) {
+          return this.getColorObj(color).isDark() ? '#fff' : '#000';
+        }
       });
     })();
   </script>

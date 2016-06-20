@@ -4,11 +4,33 @@
       :host {
         display: block;
       }
-      :host .create {
-        @apply(--layout-fullbleed);
-        @apply(--layout-horizontal);
-        @apply(--layout-center);
-        justify-content: center;
+      :host .create-container {
+        padding: 5rem 0 7rem;
+        text-align: center;
+      }
+      :host .title {
+        margin: 5rem 0;
+      }
+      :host .chooser {
+        display: flex;
+        background-color: #fff;
+        padding: 2rem;
+        max-width: 300px;
+        box-shadow: 0 2px 5px rgba(0,0,0,.2);
+        margin: 0 auto;
+      }
+      :host .color-samples-container {
+        max-width: 1200px;
+        margin: 3rem auto 5rem auto;
+        padding-top: 2rem;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,.2);
+      }
+      :host .color-samples-title {
+        margin: 0 0 0 5rem;
+      }
+      :host .color-samples-wrapper {
+        padding-top: 2rem;
       }
     </style>
   </template>
