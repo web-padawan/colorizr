@@ -6,8 +6,17 @@
 <dom-module id="shared-styles">
   <template>
     <style include="normalize mixins variables">
+      html {
+        font-size: 10px;
+        box-sizing: border-box;
+      }
+      *, :after, :before {
+        box-sizing: inherit;
+      }
       body {
+        font-size: 1.6em;
         font-family: 'Roboto', sans-serif;
+        height: 100vh;
       }
     </style>
   </template>
